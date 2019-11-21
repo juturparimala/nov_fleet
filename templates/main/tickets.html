@@ -1,0 +1,190 @@
+{% extends 'main/sidenav.html' %}
+{% load crispy_forms_tags %}
+{% block content1 %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+
+.add{
+float:right;
+color: white;
+font-size:15px;
+width:140px;
+height:40px;
+padding-right:100px;
+padding-left:60px;
+
+}
+.right{
+float:right;
+font-size:25px;
+padding-right:150px;
+
+}
+
+.left{
+float:left;
+font-size:25px;
+color:black;
+padding-left:50px;
+}
+.left1{
+float:left;
+font-size:15px;
+color:black;
+margin-left:50px;
+}
+.left2{
+float:left;
+font-size:15px;
+color:black;
+margin-left:-135px;
+}
+
+.table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 100%;
+
+}
+
+td, th {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 10px;
+}
+
+tr:nth-child(even) {
+background-color: white;
+}
+</style>
+
+<body>
+<div>
+<span class="left">Company Name</span><span class="right">Tickets</span><br><br><br>
+
+<span class="add"><button type="button" class="btn btn-primary btn-lg add" data-toggle="modal" data-target="#ticketForm">Add</button></span>
+
+<span class="left1">Melbourne,Australia</span><br>
+<span class="left2">Ph:(123)456-7890</span>
+</div><br>
+<hr>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-10">
+<table class="table" style="width:1120px;">
+<thead style="background-color:lightgray";>
+<th>#</th>
+<th>Ticket Name</th>
+<th>Description</th>
+<th>Ratings</th>
+<th>Time</th>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Woman Pescoat</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>10hrs</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Woman Pescoat</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>12hrs</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pescoat</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>15hrs</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Levaca Womens Long...</td>
+<td>Lorem ipsum dolor sit amet Consectetur</td>
+<td>432</td>
+<td>$9,928</td>
+<td><b>Sub-total:150</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-2">
+<h5 style="font-size:12px;"><b>&nbsp;&nbsp;Ticket Date:</b>&nbsp;March 15,2016<br><br><b>&nbsp;&nbsp;Ticket Status:</b>&nbsp;
+<button>Pending</button><br><br><b>&nbsp;&nbsp;Ticket ID:</b>&nbsp;#1234567</h5>
+</div></div></div>
+
+<div class="modal fade" id="ticketForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">Add tickets here</h4>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body ">
+<div class="md-form ">
+<form class="small" method="post" action="{% url 'tickets' %}">
+{% csrf_token %}
+
+<div >{{ form3|crispy}}</div>
+
+<div class="form-group " style="text-align: center">
+<input name="button-name2" type="submit" value="Submit" class="btn btn-primary">
+</div>
+
+
+</form>
+
+
+</div></div>
+</div>
+</div>
+</div>
+
+{% endblock %}

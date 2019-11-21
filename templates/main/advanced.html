@@ -1,0 +1,615 @@
+{% extends 'main/sidenav.html' %}
+{% load static %}
+{% block content1 %}
+    <title>Marker Clustering</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/style8.css' %}">
+<script>var locations = {{ myfile|safe }};</script>
+<script type="text/javascript" src="{% static 'js/style8.js' %}"></script>
+<script>
+    function CenterControl(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("{% static 'images/icons/filter.png'%}")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginTop = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Filters';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+
+}
+function CenterControl2(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("{% static 'images/icons/address.png'%}")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Address';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+
+}
+function CenterControl3(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("{% static 'images/icons/playback.png'%}")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'PlayBack';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+
+}
+function CenterControl4(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("{% static 'images/icons/tooltip.png'%}")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'ToolTip';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+}
+function CenterControl5(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("{% static 'images/icons/vehicle.png'%}")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Vehicle';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+}
+var icons = {
+Idle: {
+name: 'Idle',
+icon: '{% static 'images/yellowcar.png'%}'
+},
+Running: {
+name: 'Running',
+icon: '{% static 'images/greencar.png'%}'
+},
+Stop: {
+name: 'Stop',
+icon: '{% static 'images/redcar.png'%}'
+},
+NOData: {
+name: 'Nodata',
+icon: '{% static 'images/bluecar.png'%}'
+}
+};
+function initMap() {
+var map = new google.maps.Map(document.getElementById('map'), {
+zoom: 4.8,
+center: {lat: 22.9734, lng: 78.6569},
+disableDefaultUI: true,
+mapTypeControl:true,
+fullscreenControl: true,
+fullscreenControlOptions: {
+position: google.maps.ControlPosition.RIGHT_TOP
+},
+
+
+
+zoomControl: true,
+zoomControlOptions: {
+position: google.maps.ControlPosition.RIGHT_CENTER,
+style: google.maps.ZoomControlStyle.SMALL
+},
+
+});
+var centerControlDiv = document.createElement('div');
+var centerControl1 = new CenterControl(centerControlDiv, map);
+
+centerControlDiv.index = 1;
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv);
+var centerControlDiv1 = document.createElement('div');
+var centerControl12 = new CenterControl2(centerControlDiv1, map);
+
+centerControlDiv1.index = 1;
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv1);
+var centerControlDiv3 = document.createElement('div');
+var centerControl14 = new CenterControl3(centerControlDiv3, map);
+
+centerControlDiv3.index = 1;
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv3);
+var centerControlDiv4 = document.createElement('div');
+var centerControl15 = new CenterControl4(centerControlDiv4, map);
+
+centerControlDiv4.index = 1;
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv4);
+var centerControlDiv5 = document.createElement('div');
+var centerControl16 = new CenterControl5(centerControlDiv5, map);
+
+centerControlDiv5.index = 1;
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv5);
+google.maps.event.addDomListener(centerControlDiv , 'click', function() {
+$('#myModal').modal('toggle');
+$('#myModal').modal('show');
+});
+google.maps.event.addDomListener(centerControlDiv1 , 'click', function() {
+$('#myModal2').modal('toggle');
+$('#myModal2').modal('show');
+
+});
+google.maps.event.addDomListener(centerControlDiv3 , 'click', function() {
+$('#myModal2').modal('toggle');
+$('#myModal2').modal('show');
+
+});
+google.maps.event.addDomListener(centerControlDiv4 , 'click', function() {
+$('#myModal1').modal('toggle');
+$('#myModal1').modal('show');
+
+});
+google.maps.event.addDomListener(centerControlDiv5 , 'click', function() {
+$('#myModal3').modal('toggle');
+$('#myModal3').modal('show');
+
+});
+
+
+
+var infowindow = new google.maps.InfoWindow();
+var j,labels='';
+
+var marker = locations.map(function(location, i) {
+return new google.maps.Marker({
+position: location,
+icon: icons[location.status].icon,
+label: labels[i % labels.length],
+title: location.plate,
+map:map
+});
+
+});
+
+
+
+var markerCluster = new MarkerClusterer(map, marker,
+{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+ for (j=0;j<= marker.length;j++) {
+var mark = marker[j];
+ google.maps.event.addListener(mark, 'click', function(j) {
+ return function() {
+ document.getElementById('im').src = icons[locations[j].status].icon ;
+document.getElementById('vno').innerHTML = locations[j].plate ;
+
+$("#mySidenav").toggle();
+        document.getElementById("mySidenav").style.width = "250px";
+}}(j));
+
+}
+
+}
+var locations = {{ myfile|safe }};
+
+
+
+</script>
+
+
+
+
+
+
+<div id="mySidenav" class="sidenav" style="display:none">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><br>
+<div class="container">
+    <div class="panel panel-default">
+    <div class="panel-heading"><img src="" id="im"> <label id="vno" style="font-size:14px;"></label></div>
+    <div class="panel-body "><div >
+        <label>Company&nbsp;<span id="company">AmigaIT</span></label><br><label>Branch</label><br><label>Vehicle Type</label><br><label>Driver</label><br><label>Mobile No</label><br><label>Speed</label>
+    </div>
+        <div style="background-color:#F2F3F4">
+            <h4>Location <img src=" https://img.icons8.com/wired/2x/marker.png" style="width:20px;height:20px;" onclick="">&nbsp;&nbsp;<img src="https://img.icons8.com/pastel-glyph/2x/worldwide-location--v2.png" style="width:20px;height:20px;" onclick="">&nbsp;&nbsp;<img src="https://img.icons8.com/material-rounded/2x/share-3.png"style="width:20px;height:20px;"onclick=""></h4>
+<label>Reached Time</label><br><label>Latitude&nbsp;&nbsp;&nbsp;Longitude</label>
+        </div><div>
+        <label>Travel Distance</label><br><input type="range" name="price-min" id="price-min" value="200" min="0" max="1000"></div><div><label>Travel Duration</label><br><input type="range" name="price-min" id="price-mi" value="200" min="0" max="1000"></div>
+  <div><img src="https://img.icons8.com/ios/20/000000/speed.png">&nbsp;<b>Speed</b>
+<br><br>
+1 Km/h&nbsp;&nbsp;&nbsp;1 Km/h&nbsp;&nbsp;&nbsp;0 Km/h<br>
+Max&nbsp;&nbsp;&nbsp; AVG&nbsp;&nbsp;&nbsp; Current
+</div>
+<style="width:20%;"><hr></style>
+<div>
+<img src="https://img.icons8.com/officexs/20/000000/high-risk.png">&nbsp;Alert&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://img.icons8.com/color/20/000000/parking.png">&nbsp;Parking<br>
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+07:57&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:59<br>
+Last Stop &nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp; Last Stop &nbsp;&nbsp;Total
+</div>
+<hr>
+<div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+         <div class="btn-group">
+<button type="button" class="btn btn-primary" id="c">Company</button>&nbsp;<button type="button" class="btn btn-primary" id="b">Branch</button><button type="button" class="btn btn-primary" id="vt">Vehicle Type</button><button type="button" class="btn btn-primary"id="vg">Vehicle Group</button><button type="button" class="btn btn-primary" id="v">Vehicle</button>
+</div><div>
+<div id="c1">
+<input type="checkbox" value="" id="check1">&nbsp;&nbsp;Andavar<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Aashotaush Kumar<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Amaitranjan Kumar<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Amod Kumar<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Arun Yadav<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Bhushan Mistri<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Suraj Kumar<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;SSK<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Tracalogic<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Upendra Kumar<br>
+</div>
+<div id="b1">
+<label>Andavar</label><br>
+<input type="checkbox" value="" id="check2">&nbsp;&nbsp;Chennai<br><br>
+<label>Aashotaush Kumar</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Shaikhpura<br><br>
+<label>Amaitranjan Kumar</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Bihar<br><br>
+<label>Amod Kumar</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Delhi<br><br>
+<label>Arun Yadav</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Chennai<br><br>
+<label>Bhushan Mistri</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;India<br><br>
+<label>Suraj Kumar</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Patna<br><br>
+<label>SSK</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Patna<br><br>
+<label>Tracalogic</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Chennai<br><br>
+<label>Upendra Kumar</label><br>
+<input type="checkbox" value="" class="ch2">&nbsp;&nbsp;Delhi<br>
+</div>
+<div id="vt1">
+<input type="checkbox" value="" id="check3">&nbsp;&nbsp;Ambulance<br>
+<input type="checkbox" value="" class="ch3">&nbsp;&nbsp;Car<br>
+<input type="checkbox" value="" class="ch3">&nbsp;&nbsp;Bus<br>
+<input type="checkbox" value="" class="ch3">&nbsp;&nbsp;Bike<br>
+<input type="checkbox" value="" class="ch3">&nbsp;&nbsp;Truck<br>
+<input type="checkbox" value="" class="ch3">&nbsp;&nbsp;Tempo<br>
+</div>
+<div id="vg1">
+
+<input type="checkbox" value="" class="ch">&nbsp;&nbsp;<br>
+<input type="checkbox" value="" class="ch">&nbsp;&nbsp;<br>
+</div>
+<div id="v1">
+<input type="checkbox" value="all" id="check4">&nbsp;&nbsp;Select All<br>
+<input type="checkbox" value="" class="ch4">&nbsp;&nbsp;<br>
+<input type="checkbox" value="" class="ch4">&nbsp;&nbsp;<br>
+</div>
+</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h1>Tooltip</h1>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+<label for="vehicle1">Vehicle Information</label>
+<table><tr><td><input type="checkbox" value="" id="check7s">&nbsp;&nbsp;Company&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="checkbox" value="" id="check11">&nbsp;&nbsp;Type</td></tr>
+<br>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Branch&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Driver</td></tr>
+<br>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Number&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;License Expiry</td></tr>
+</table>
+<hr>
+<label for="vehicle1">Live Information</label><br>
+<input type="checkbox" value="" id="check12">&nbsp;&nbsp;Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" id="check9s">&nbsp;&nbsp;Time
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Geo Location
+<hr>
+<label for="vehicle1">Distance Information</label><br>
+<input type="checkbox" value="" id="check">&nbsp;&nbsp;Last Stop
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Total
+<hr>
+<label for="vehicle1">Duration Information</label><br>
+<input type="checkbox" value="" id="checks">&nbsp;&nbsp;Last Stop
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Total
+<hr>
+<label for="vehicle1">Parking Information</label><br>
+<input type="checkbox" value="" id="check1s">&nbsp;&nbsp;Last Stop
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Total
+<hr>
+<label for="vehicle1">Speed Information</label><br>
+<input type="checkbox" value="" id="check2s">&nbsp;&nbsp;Average&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" id="check4s">&nbsp;&nbsp;&nbsp;Speedometer
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Max
+<hr>
+<label for="vehicle1">Alert Information</label><br>
+<input type="checkbox" value="" id="check3s">&nbsp;&nbsp;Last Stop
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Total
+<hr>
+<label for="vehicle1">Port Information</label>
+<table><tr><td><input type="checkbox" value="" id="check5s">&nbsp;&nbsp;Ignition&nbsp;&nbsp;</td><td><input type="checkbox" value="" id="check6s">&nbsp;&nbsp;PDOP</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Power&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Network Mode</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;AC&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Movement</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;GPS&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Engine 1</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;GSM&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Engine 2</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;External Power&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Internal Battery(Voltage)</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Battery(%)&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Internal Battery(%)</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Deep Sleep Mode&nbsp;&nbsp;</td><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Seat Belt</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Cell ID</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Area Code</td></tr>
+<tr><td><input type="checkbox" value="" class="ch1">&nbsp;&nbsp;HDOP</td></tr>
+</table>
+<hr>
+<label for="vehicle1">Other Controls</label><br>
+<input type="checkbox" value="" id="check13">&nbsp;&nbsp;Odometer
+<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Fuel Meter
+
+
+</div>
+        </div>
+
+      </div>
+
+    </div>
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+     <h2>Address Type</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+</div>
+<div class="modal-body">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<table id="myTable">
+<tr><td>
+<label><input type="checkbox" value="">&nbsp;&nbsp;Airport</label></td>
+</tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;ATM</label></td>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Bank</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Beach</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Bridge</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Bulk Milk Coolers</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Bus Stop</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Chilling Center</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Dairies</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Depot</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;District</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Facility</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Factory</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Fuel Filling Station</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Gate</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;HCE</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;HighWay</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Home</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Hospital</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Hotel</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Jelly</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;KM Post</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Lake</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Lease</label></td>
+</tr>
+<tr>
+<td><label><input type="checkbox" value="">&nbsp;&nbsp;Lease</label></td>
+</tr>
+</table>
+		</div>
+		</div>
+		</div>
+		</div>
+<div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header">
+              <h1>Vehicle</h1>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+<h4>Show Label</h4>
+<label class="switch"><input type="checkbox"></label><br>
+<h5>Shows Vehicle Number-Type</h5>
+<hr>
+<h4>Show Cluster</h4>
+<label class="switch"><input type="checkbox"></label><br>
+<h5>Shows Vehicles in Cluster</h5>
+</div>
+</div>
+</div>
+</div>
+    <div class="modal fade" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h1>Settings <a href="#"><i class="fa fa-save" style="font-size:20px;float:right" data-placement="bottom" title="Save"></i></a></h1>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+<label for="vehicle">Select Column for Textual Report</label><br>
+<input type="checkbox" value="" id="check11">&nbsp;&nbsp;SN<br>
+<input type="checkbox" value="" id="check11">&nbsp;&nbsp;Driver<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;IGN</br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;PWR<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;AC<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;GPS<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Duration<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Speed<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Location<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;POI<br>
+<input type="checkbox" value="" class="ch1">&nbsp;&nbsp;Info<br>
+</div>
+        </div>
+
+      </div>
+
+    </div>
+
+ <div  class="container-fluid bg-light" >
+     <div class="row"><div class="col-lg-6 col-md-6 col-sm-6 "></div>
+         <div class="col-lg-1 col-md-1 col-sm-1 padding-0"  >    <form method='GET'>  <button class = 'p'  name="runningbutton" type='submit'>
+    <span style="color:green;font-size:18px"><b>{{ running }}</b> </span><p style="font-size:14px"><b>Running</b></p></button></form></div>
+         <div class="col-lg-1 col-md-1 col-sm-1 padding-0"> <form method='GET'> <button class = 'p'  name="idlebutton" type='submit'>
+          <span style="color:orange;font-size:18px"><b>{{ idle }}</b> </span><br><p style="font-size:14px"><b>Idle</b></p></button> </form></div>
+         <div class="  col-lg-1 col-md-1 col-sm-1"> <form method='GET'> <button class="p"  name="stopbutton" type='submit'>
+             <span style="color:red;font-size:18px"><b>{{ stop }}</b> </span><br><p style="font-size:14px"><b>Stop</b></p>
+         </button></form>  </div>
+         <div class=" col-lg-1  col-md-1 col-sm-1"> <form method='GET'>  <button class="p"><span style="font-size:18px">0</span><br><p style="font-size:14px"><b>NoData</b></p></button></form></div>
+
+         <div class=" col-lg-1 col-md-1 col-sm-1">
+            <form method='GET'> <button class = 'p'  name="totalbutton"  type='submit'>
+                <span style="font-size:18px"><b>{{ total }} </b></span><br><p style="font-size:14px"><b>Total</b></p></button></form> </div>
+
+
+
+    <div class=" col-lg-1 col-sm-1 col-md-1" >
+<a href="#"><span class="fa fa-print" style="font-size:20px;padding-right:20px;" onclick="myFunction()" data-placement="bottom" title="Print"></span></a>
+     <a href="#"><i class="fa fa-refresh" style="font-size:20px" data-placement="bottom" title="Refresh" onclick="history.go(0)" ></i></a>
+</div></div>
+     </div>
+
+        <div id="map" ></div>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&callback=initMap">
+    </script>
+{% endblock %}

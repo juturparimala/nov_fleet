@@ -1,0 +1,190 @@
+{% load static %}
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Welcome</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" ></script>-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" ></script>-->
+<!--    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
+<!--    <script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script>-->
+
+
+<style>
+
+h3{
+margin-top:0px;
+}
+
+#main {
+  transition: margin-left 2.5s;
+}
+#.dropdown-menu-right{position: absolute;
+    overflow: auto;
+    height: 280px;
+    transform: translate3d(154px, 10px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;}
+.sidebar {
+  height:100%;
+  position: fixed;
+  z-index:999;
+  left: -175px;
+  top:15px;
+  transition: 2.8s;
+  margin-top: 0px;
+  padding: 8px;
+  width: 180px;
+ text-decoration: none;
+ }
+
+.sidebar:hover {
+  left: 0;
+}
+.file{margin-left:70px;}
+
+.navbar-fixed-top {
+    position:fixed !important;
+}
+
+.navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+</style>
+</head>
+<body>
+<nav class="navbar py-0 navbar-expand-lg  bg-dark fixed-top py-md-0  navbar-fixed-top">
+  <a class="navbar-brand"href="http://127.0.0.1:8000/"><h4 style="color:white">Fleet Management</h4></a>
+
+     <form class="form-inline ml-auto mr-auto "   action="{% url 'ci' %}"  style="width: 75%;"mdbRippleRadius>
+   <input class="form-control form-control-sm " type="text" placeholder="Search" style="width:70%">
+    <button class="btn btn-success btn-sm " type="submit">  <i class="fa fa-search"></i></button>
+  </form><button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav" >
+    <ul class="nav navbar-nav ml-auto mb-auto" >
+         {% if user.is_authenticated %}
+           <li class="nav-item active" >  <a class="nav-link" href="{% url 'profile' %}" style="font-size:16px;color:white">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="font-size:18px;color:white" title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        {% else %}
+            <li class="nav-item "><a class="nav-link" href="{% url 'login' %}" style="font-size:16px;color:white">Login</a></li>
+        {% endif %}
+    </ul></div>
+</nav>
+
+<div class="sidebar bg-dark" id="sidebar">
+<ul class="list-unstyled">
+<li style="margin-top:20px" class="dropdown"><a href="{%url 'profile'%}" style="text-decoration:none;padding-top:20px;" ><img src="{% static 'images/profile.png'%}"height="21px" width="23px" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</a>
+</li>
+<li class="dropdown dropright "> <a href="#" class="dropdown-toggle " data-toggle="dropdown" style="text-decoration:none;"><img src="{% static 'images/track.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Track</a>
+<ul class="dropdown-menu dropdown-menu-right" style="position: absolute;">
+<li><a href="{%url 'advance'%}">Advance Tracking &nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/advtrack.png'%}"></a></li>
+<li> <a href="{%url 'detail'%}">Detail Dashboard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/dtils.png'%}"></a></li>
+<li><a href="{%url 'cluster'%}">Dashboard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/dshbrd.png'%}"></a></li>
+</ul>
+</li>
+
+<li class="dropdown dropright "><a href="#" class="dropdown-toggle" data-toggle="dropdown" ><img src="{% static 'images/reports.png'%}" height="21px" width="23px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reports</a>
+<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; overflow:auto;height:280px;">
+<li><a href="{%url 'travel'%}">Travel Summary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/trvlsmry.png'%}"></a>
+<li><a href="{%url 'detail_travel'%}">Travel Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="{%static 'images/icons/trvldtilsmry.png'%}"></a></li>
+<li><a href="{%url 'trip_summary'%}">Trip Summary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/trpsmry.png'%}"></a></li>
+<li><a href="{%url 'stoppage_summary'%}">StoppageSummary <img src="{%static 'images/icons/stpsmry.png'%}"></a></li>
+<li><a href="{%url 'idle_summary'%}">Idle Summary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/idlsmry.png'%}"></a></li>
+<li><a href="{%url 'idle_detail_summary'%}">Idle Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="{%static 'images/icons/idldtilsmry.png'%}"></a></li>
+<li><a href="{%url 'inactive_summary'%}">Inactive Summary &nbsp;<img src="{%static 'images/icons/inactvsmry.png'%}"></a></li>
+<li><a href="{%url 'ignition_summary'%}">ignition Summary &nbsp;<img src="{%static 'images/icons/igntnsmry.png'%}"></a></li>
+<li><a href="{%url 'ac_summary'%}">AC Summary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/acsmry.png'%}"></a></li>
+<li><a href="{%url 'ac_misused_summary'%}">AC Misused &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<img src="{%static 'images/icons/acmisusdsmry.png'%}"></a></li>
+<li><a href="{%url 'speed_vs_distance'%}">Speed vs Distance &nbsp;<img src="{%static 'images/icons/spdvsdistnce.png'%}"></a></li>
+<li><a href="{%url 'vehicle_location'%}">Vehicle Location &nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/veilocatn.png'%}"></a></li>
+<li><a href="{%url 'sms_email'%}">SMS - Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/smsemil.png'%}"></a></li>
+<li><a href="{%url 'vehicle_status'%}">Vehicle Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/veilsts.png'%}"></a></li>
+<li><a href="{%url 'system_log'%}">System Log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/syslog.png'%}"></a></li>
+<li><a href="{%url 'device_log'%}">Device Log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/divclog.png'%}"></a>
+<li><a href="{%url 'analog_data'%}">Analog Data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/analog.png'%}"></a>
+<li><a href="{%url 'personal_report'%}">Personal Report &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/prsnlreprt.png'%}"></a>
+<li><a href="{%url 'report_generator'%}">Report Generator &nbsp;&nbsp;<img src="{%static 'images/icons/reprtgen.png'%}"></a>
+<li><a href="{%url 'actual_trip_summary'%}">Actual Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/actltrpsmry.png'%}"></a>
+<li><a href="{%url 'rfid_data'%}">RFID Data  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/rfid.png'%}"></a>
+</ul>
+</li>
+<li class="dropdown"><a href="{%url 'chart'%}" style="text-decoration:none;" ><img src="{% static 'images/graphs.png'%}"height="21px" width="23px" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Graph</a>
+<!--</li><ul class="dropdown-menu dropdown-menu-right" style="position: absolute; ">-->
+<!--<li><a href="{%url 'chart'%}">Graph &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;<img src="{% static 'images/graphs.png'%}"></a></li>-->
+<!--<li><a href="{%url 'chart'%}">Duration &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="https://img.icons8.com/dotty/20/000000/property-time.png"></a></li>-->
+<!--<li><a href="{%url 'chart'%}">Alerts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="https://img.icons8.com/ios/20/000000/cloud-alert.png"></a></li>-->
+<!--<li><a href="{%url 'chart'%}">Speed vs Travel &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.icons8.com/pastel-glyph/20/000000/speedometer.png"></a></li>-->
+<!--<li><a href="{%url 'chart'%}">Personal Graph &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.icons8.com/pastel-glyph/20/000000/positive-dynamic.png"></a></li>-->
+<!--<li><a href="{%url 'chart'%}">Schedule Graphs &nbsp;&nbsp;<img src="https://img.icons8.com/ios/20/000000/graph.png"></a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<li class="dropdown dropright "> <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration:none;"><img src="{% static 'images/tour3.png'%}" height="23px" width="23px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tour</a>
+<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; ">
+<li><a href="{%url 'addtrip'%}">Tour Planning &nbsp;<img src="{%static 'images/icons/turplang.png'%}"></a></li>
+<li><a href="{%url 'addtrip'%}">Tour Allocation <img src="{%static 'images/icons/turaloctn.png'%}"></a></li>
+</ul>
+</li>
+<li class="dropdown dropright "><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="text-decoration:none;"><img src="{% static 'images/alerts.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alerts</a>
+<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; ">
+<li><a href="{%url 'alerts'%}">Vehicle Alert &nbsp;<img src="{%static 'images/icons/veialrts.png'%}"></a></li>
+<li><a href="{%url 'alerts'%}">Add Alert &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/addalrm.png'%}"></a></li>
+</ul>
+</li>
+<li class="dropdown dropright"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="text-decoration:none;"><img src="{% static 'images/geofence.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geofence</a>
+<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; ">
+<li><a href="{%url 'geofence'%}">Add Geofence &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'images/icons/addgeofnc.png'%}"></a></li>
+<li><a href="{%url 'geofence'%}">Geofence Summary-A <img src="{%static 'images/icons/geofncsmryA.png'%}"></a></li>
+<li><a href="{%url 'geofence'%}">Geofence Summary-B <img src="{%static 'images/icons/geofncsmryB.png'%}"></a></li>
+</ul>
+</li>
+<li class="dropdown dropright"><a href="#" style="text-decoration:none;"><img src="{% static 'images/payment.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment</a>
+<!--<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; ">-->
+<!--<li><a href="#">Cost Configuration &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.icons8.com/material-outlined/20/000000/phonelink-setup.png"></a></li>-->
+<!--<li><a href="#">Payment Gateway Configuration <img src="https://img.icons8.com/material-sharp/20/000000/online-payment-.png"></a></li>-->
+<!--</ul>-->
+</li>
+<li class="dropdown" ><a  href="{%url 'tickets'%}" style="text-decoration:none;"><img src="{% static 'images/tickets.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tickets</a>
+</li>
+<li class="dropdown"><a  href="{%url 'settings'%}" style="text-decoration:none;"><img src="{% static 'images/settings.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings</a>
+</li>
+<li class="dropdown"><a  href="{%url 'helpcenter'%}" style="text-decoration:none;"><img src="{% static 'images/helpcenter.png'%}" height="23px" width="25px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Help Center</a>
+</li></ul>
+</div>
+
+
+
+<div class="content" >
+
+  {% block content1 %}
+
+    {% endblock content1 %}
+
+
+</div>
+
+</body>
+</html>
+{% endspaceless %}

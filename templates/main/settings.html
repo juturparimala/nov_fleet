@@ -1,0 +1,277 @@
+{% extends 'main/sidenav.html' %}
+{% load crispy_forms_tags %}
+{% block content1 %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+th,td{
+
+}
+body {
+
+}
+
+.sidenav {
+height: 100%;
+width: 200px;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+background-color: white;
+overflow-x: hidden;
+padding-top: 20px;
+}
+
+.sidenav a {
+padding: 6px 8px 6px 16px;
+text-decoration: none;
+font-size: 16px;
+color: #818181;
+display: block;
+}
+
+
+.main {
+margin-left: 160px; / Same as the width of the sidenav /
+font-size: 16px; / Increased text to enable scrolling /
+padding: 0px 0px;
+}
+a:hover {
+background-color: #f2f2f2;
+}
+</style>
+</head>
+<div class="sidenav" style="margin-left:20px;">
+<a href="#" style="color:black;text-decoration:none;"><img src="https://img.icons8.com/material-outlined/20/000000/reply-all.png">&nbsp;&nbsp;All</a><hr>
+<a href="#" style="color:black;text-decoration:none;"><img src="https://img.icons8.com/ios/20/000000/star.png">&nbsp;&nbsp;&nbsp;Devices</a>
+<a href="#" style="color:black;text-decoration:none;"><img src="https://img.icons8.com/windows/20/000000/warning-shield.png">&nbsp;&nbsp;&nbsp; Immobilize</a>
+<a href="#" style="color:black;text-decoration:none;"><img src="https://img.icons8.com/android/20/000000/checkmark.png">&nbsp;&nbsp;&nbsp; Done</a>
+<a href="#" style="color:black;text-decoration:none;"><img src="https://img.icons8.com/windows/20/000000/trash.png">&nbsp;&nbsp;&nbsp; Trashed</a>
+<hr>
+<a style="color:black;text-decoration:none;">&nbsp;&nbsp;&nbsp; Labels</a>
+<ul>
+<li style="color:green;font-size:27px;"><a href="#" style="color:black;text-decoration:none;">Active</a>
+</li>
+<li style="color:purple;font-size:27px;"><a href="#" style="color:black;text-decoration:none;">Inactive</a>
+</li>
+<li style="color:orange;font-size:27px;"><a href="#" style="color:black;text-decoration:none;">No Data</a>
+</li>
+<li style="color:red;font-size:27px;"><a href="#" style="color:black;text-decoration:none;">Alert</a>
+</li>
+</ul>
+</div>
+<div class="main" style="margin-top: 75px; margin-right: 0px; padding-left:61px;">
+<title>sidebar with table</title>
+<table class="table table-hover" Style="width:100%;">
+<thead>
+<tr>
+<h2>Settings<span><button type="button" class="btn btn-danger" style="float: right;font-size:13px;">Remove Device</button>
+<button type="button" class="btn btn-primary" style="float: right;font-size:13px;">Add Device</button></span></h2>
+</tr>
+</thead><hr>
+</table>
+
+<tr>
+<h4><b>240 Devices</b><span><button class="text-primary" style="color:blue;float: right;font-size:13px;">Previous&nbsp;&nbsp;Next</button>
+<button class="text-primary" style="color:blue;float: right;font-size:13px;">Log Out</button></span></h4>
+</tr>
+<table class="table table-hover" Style="width:100%;">
+<thead style="background-color:#d9d9d9">
+<tr style="font-size:13px;">
+<th>Device Id</th>
+<th>Device Type</th>
+<th>IMEI No</th>
+<th>Driver Name</th>
+<th>Licence Id</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+</br>
+<tbody style="font-size:11px;">
+<tr>
+<td>AT246456</td>
+<td>ET 300</td>
+<td>111222334312431</td>
+<td>Michal</td>
+<td>TN9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+</br>
+<tr>
+<td>TN240056</td>
+<td>ET 300</td>
+<td>111000933476524</td>
+<td>Wilson</td>
+<td>KA9765 VT900046</td>
+<td>Idle</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH21246</td>
+<td>ET 300</td>
+<td>901228973431243</td>
+<td>Steve</td>
+<td>MH9854 Ht9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Tn246006</td>
+<td>ET 300</td>
+<td>875695334312431</td>
+<td>Michal</td>
+<td>TN9004 VT98321646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>KA249956</td>
+<td>ET 300</td>
+<td>543213343124130</td>
+<td>Jhon</td>
+<td>KA0054 VT0077646</td>
+<td>Stop</td>
+<td>None</td>
+</tr>
+<tr>
+<td>AT246456</td>
+<td>ET 300</td>
+<td>111222334312431</td>
+<td>Michal</td>
+<td>TN9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>AN246456</td>
+<td>ET 300</td>
+<td>676222334312411</td>
+<td>Mohamad</td>
+<td>AN7654 VT6667646</td>
+<td>Stop</td>
+<td>None</td>
+</tr>
+<tr>
+<td>TN000006</td>
+<td>ET 300</td>
+<td>111222000012431</td>
+<td>Rock</td>
+<td>TN1234 VT98123461</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>AT246456</td>
+<td>ET 300</td>
+<td>111222334312431</td>
+<td>Michal</td>
+<td>TN9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>KA246400</td>
+<td>ET 300</td>
+<td>555213334312431</td>
+<td>Reymond</td>
+<td>KA0054 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+<tr>
+<td>MH98542</td>
+<td>ET 300</td>
+<td>555222334312143</td>
+<td>Martin</td>
+<td>MH9854 VT9877646</td>
+<td>Running</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+</div>
+{% endblock %}

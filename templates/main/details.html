@@ -1,0 +1,175 @@
+{% extends 'main/sidenav.html' %}
+{% load static from staticfiles %}
+{% block content1 %}
+<link rel="stylesheet" href="{% static 'css/style7.css' %}">
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+ $( document ).ready(function() {
+
+am4core.useTheme(am4themes_animated);
+
+var chart = am4core.create("chartdiv", am4charts.PieChart);
+chart.hiddenState.properties.opacity = 0;
+
+chart.data = [
+  {
+    country: "No Data",
+    value: 260
+  },
+
+  {
+    country: "Stop",
+    value: 200
+  },
+  {
+    country: "Idle",
+    value: 165
+  },
+  {
+    country: "Running",
+    value: 139
+  },
+
+];
+
+var series = chart.series.push(new am4charts.PieSeries());
+series.dataFields.value = "value";
+series.dataFields.category = "country";
+series.slices.template.cornerRadius = 6;
+series.colors.step = 4;
+series.legendSettings.valueText.disabled=true;
+
+chart.legend = new am4charts.Legend();
+chart.legend.position = "left";
+chart.legend.markers.template.disabled = true;
+chart.legend.labels.template.disabled=true;
+chart.legend.itemContainers.template.togglable = false;
+chart.legend.itemContainers.template.events.on("hit", function(ev) {
+
+    });
+
+
+    });
+
+</script>
+<style>#chartwrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+#chartdiv {
+  position: absolute;
+  top: 0px;
+  right: 120px;
+  width : 130px;
+  height : 130px;
+}
+
+
+</style>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+
+    <div class="container-fluid a" style="position:relative;">
+<br>
+<div class="row" >
+<div class="col-lg-2 card  "><form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="totalbutton" type='submit'>
+<div class="card-body "><img class="card-img-left" src="{% static 'images/miniwhite.png'%}" height="45px" width="100px" >
+ &nbsp; &nbsp;<span style="font-size: 25px">{{ total }} </span><b style="padding-left:50px;">Total</b></div>
+</button></form></div>
+
+<div class="col-lg-2 card ">
+<form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="runningbutton" type='submit'><div class="card-body"><img class="card-img-left" src="{% static 'images/minigreen.png'%}" height="40px" width="90px" >
+   &nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size: 25px">{{ running }} </span><b style="padding-left:50px;">Running</b></div>
+</button></form></div>
+
+<div class="col-lg-2 card " >
+<form method='GET'><button style="background-color: transparent;" class = 'p' name="idlebutton" type='submit'><div class="card-body " ><img class="card-img-left" src="{% static 'images/miniyellow.png'%}" height="40px" width="100px">
+ &nbsp;&nbsp;&nbsp;  <span style="font-size: 25px">{{ idle }} </span><b style="padding-left:50px;">Idle</b></div>
+</button></form></div>
+
+<div class="col-lg-2 card"><form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="stopbutton" type='submit'>
+<div class="card-body "><img class="card-img-left" src="{% static 'images/minired.png'%}" height="40px" width="100px" >
+&nbsp;&nbsp;<span style="font-size: 25px">{{ stop }} </span><b style="padding-left:50px;margin-bottom: 30px;">Stop</b></div>
+</button></form></div>
+<div class="col-lg-2 card ">
+<div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
+  &nbsp; &nbsp;&nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></div>
+ <div class="col-lg-2" id="chartdiv">  </div>
+</div></div>
+<div  class="container-fluid scrollit">
+    <table   cellpadding="5" cellspacing="5" ><tr>
+       <th style="text-decoration:none;color:rgb(0, 0, 0);">S.no</th>
+        <th style="text-decoration:none;color:rgb(0, 0, 0);">Status</th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/driver_name.png" style="width:16px;height:16px;"><br>Driver</a></th>
+        <th style="text-decoration:none;color:rgb(0, 0, 0);">Branch</th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/vehicle_information.png" style="width:16px;height:16px;"><br>Vehicle</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_running_km.png" style="width:16px;height:16px;"><br>Distance</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_running_duration.png" style="width:16px;height:16px;"><br>Running</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_idle_duration.png" style="width:16px;height:16px;"><br>Idle</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_stop_duration.png" style="width:16px;height:16px;"><br>Stop</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/duration.png" style="width:16px;height:16px;"><br>Duration</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/speed.png" style="width:16px;height:16px;"><br>Speed</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/odometer.png" style="width:16px;height:16px;"><br>Odometer</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/location.png" style="width:16px;height:16px;"><br>Latitude</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/location.png" style="width:16px;height:16px;"><br>Longitude</a></th>
+        <th><a  href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Geofence</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/updated_time.png" style="width:16px;height:16px;"><br>DateTime</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/alert.png" style="width:16px;height:16px;"><br>Alert</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/ignition_status.png" style="width:16px;height:16px;"><br>IGN</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/power_status.png" style="width:16px;height:16px;"><br>PWR</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/ac_status.png" style="width:16px;height:16px;"><br>AC</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/gps_status.png" style="width:16px;height:16px;"><br>GPS</a></th>
+        <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/fuel.png" style="width:16px;height:16px;"><br>Fuel</a></th>
+        </tr>
+
+{% for i in myfile1 %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+
+            <td>
+                {% if i.status == 'Running'%}
+                <img src="{% static 'images/greencar.png'%}">
+                {% elif i.status == 'Idle'%}
+                <img src="{% static 'images/yellowcar.png'%}">
+                {% elif i.status == 'Stop'%}
+                <img src="{% static 'images/redcar.png'%}">
+                {%else%}
+                <img src="{% static 'images/bluecar.png'%}">
+                {%endif%}
+            </td>
+
+              <td>{{ i.name }}</td>
+              <td>India</td>
+              <td>{{ i.plateNumber }}</td>
+              <td>*</td>
+              <td>00.00</td>
+              <td>00.00</td>
+              <td>00.00</td>
+              <td>00.00</td>
+              <td>{{ i.speed }}</td>
+              <td>{{ i.odometer }}</td>
+              <td>{{ i.latitude }}</td>
+              <td>{{ i.longitude }}</td>
+              <td>{{ i.status }}</td>
+              <td>12-9-2019</td>
+              <td>--</td>
+              <td>0</td>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            <td>--</td>
+        </tr>
+         {% endfor %}
+
+    </table>
+</div>
+
+        <!-- Modal footer -->
+
+
+
+{% endblock content1 %}
