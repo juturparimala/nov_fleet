@@ -1,6 +1,6 @@
 #map{
 width:100%;
-height:82vh;
+height:92.7%;
 position:relative;
 margin:0px;
 padding:0px;
@@ -52,21 +52,20 @@ align-items:center;
 display:flex;
 margin:0px;
 padding:0px;
-    #max-width: 4.333333%;
 }
-
+.re{
+    border-style:none;
+    text-align:center;
+    }
 .p {
-
 -webkit-appearance: button;
 -webkit-writing-mode: horizontal-tb !important;
- display: inline-block;
- width:45px;
+ align-items: center;
  margin: 0em;
- padding: 0px;
+  display: inline;
  background-color: transparent;
- font-size:11px;
- text-align:center;
-
+border:0;
+outline:none;
 }
 
 .switch input {
@@ -74,8 +73,6 @@ padding:0px;
   width: 0;
   height: 0;
 }
-
-
 
 
 .slider {
@@ -89,7 +86,9 @@ padding:0px;
   -webkit-transition: .4s;
   transition: .4s;
 }
-
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;}
 .slider:before {
   position: absolute;
   content: "";

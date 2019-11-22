@@ -206,6 +206,13 @@ top: 0px;
 left: 0px;
 right: 0px;
 bottom: 0px;
-
 }
 body{background-color:grey;}
+.file{margin:0;
+left:10%;
+right:4%;
+position:fixed;
+   top:20%;
+padding:0px;
+
+}

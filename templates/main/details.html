@@ -126,7 +126,7 @@ chart.legend.itemContainers.template.events.on("hit", function(ev) {
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/fuel.png" style="width:16px;height:16px;"><br>Fuel</a></th>
         </tr>
 
-{% for i in myfile1 %}
+{% for i in  object_list%}
         <tr>
             <td>{{ forloop.counter }}</td>
 

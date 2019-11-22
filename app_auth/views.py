@@ -192,7 +192,7 @@ def detail(request):
         p1, result = funclu(df4)
     else:
         p1, result = funclu(df1)
-    print(result.plate)
+
     context = {"object_list":queryset,'total':total,'running':running,'idle':idle, 'stop':stop, "myfile1":result}
     return render(request, 'main/details.html',context)
 

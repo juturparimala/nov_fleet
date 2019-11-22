@@ -1,134 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<style type="text/css">
-html { height: 100% }
-body { height: 100%; margin: 0; padding: 0 }
-#map { height: 90%; width: 90% }
-</style>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Animating Symbols</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        width:100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // This example adds an animated symbol to a polyline.
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
-<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU">
-</script>
-<script type="text/javascript">
-var line;
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 12.9249, lng: 80.1000},
+          zoom: 12,
+          mapTypeId: 'terrain'
+        });
 
-var map;
-var pointDistances;
+        // Define the symbol, using one of the predefined paths ('CIRCLE')
+        // supplied by the Google Maps JavaScript API.
+        var lineSymbol = {
+           path:  "M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805",
+        scale: 1,
+		fillColor:'blue',
+		fillOpacity: 1,
+        strokeColor: '#393',
+		 anchor: new google.maps.Point(23, 0)
+        };
 
-function initialize() {
-var mapOptions = {
-center: new google.maps.LatLng(2.881766, 101.626877),
-zoom: 12,
-mapTypeId: google.maps.MapTypeId.ROADMAP
-};
+        // Create the polyline and add the symbol to it via the 'icons' property.
+        var line = new google.maps.Polyline({
+          path: [{lat: 12.9010, lng: 80.2279}, {lat: 12.9249, lng: 80.1000},{lat: 13.0067, lng: 80.2206}],
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }],
+          map: map
+        });
 
-map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        animateCircle(line);
+      }
 
-var lineCoordinates = [
-new google.maps.LatLng(12.9010, 80.2279),
-new google.maps.LatLng(12.9249, 80.1000),
-new google.maps.LatLng(13.0067, 80.2206),
+      // Use the DOM setInterval() function to change the offset of the symbol
+      // at fixed intervals.
+      function animateCircle(line) {
+          var count = 0;
+		  var x =line.getPath();
+          window.setInterval(function() {
+            count = (count + 1) % 200;
 
-];
-
-map.setCenter(lineCoordinates[0]);
-
-// point distances from beginning in %
-var sphericalLib = google.maps.geometry.spherical;
-
-pointDistances = [];
-var pointZero = lineCoordinates[0];
-var wholeDist = sphericalLib.computeDistanceBetween(
-pointZero,
-lineCoordinates[lineCoordinates.length - 1]);
-
-for (var i = 0; i < lineCoordinates.length; i++) {
-pointDistances[i] = 100 * sphericalLib.computeDistanceBetween(
-lineCoordinates[i], pointZero) / wholeDist;
-console.log('pointDistances[' + i + ']: ' + pointDistances[i]);
-}
-
-// define polyline
-var lineSymbol = {
-path: "M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759 c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713 v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336 h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805",
-scale: 1,
-fillColor:'blue',
-fillOpacity: 1,
-strokeColor: '#393',
-anchor: new google.maps.Point(23, 0)
-};
-
-line = new google.maps.Polyline({
-path:google.maps.geometry.poly.containsLocation(lineCoordinates),
-strokeColor: '#FF0000',
-strokeOpacity: 1.0,
-strokeWeight: 2,
-geodesic: true,
-
-icons: [{
-icon: lineSymbol,
-offset: '100%'
-}],
-map: map
-});
-
-animateCircle();
-}
-
-
-var id;
-function animateCircle() {
-var count = 0;
-var offset;
-var sentiel = -1;
-
-id = window.setInterval(function () {
-count = (count + 1) % 200;
-offset = count /2;
-
-for (var i = pointDistances.length - 1; i > sentiel; i--) {
-if (offset > pointDistances[i]) {
-console.log('create marker');
-var marker = new google.maps.Marker({
-icon: {
-url:"https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
-size: new google.maps.Size(7,7),
-anchor: new google.maps.Point(4,4)
-},
-position: line.getPath().getAt(i),
-title: line.getPath().getAt(i).toUrlValue(6),
-map: map
-});
-
-sentiel++;
-break;
-}
-}
-
-// we have only one icon
-var icons = line.get('icons');
-icons[0].offset = (offset) + '%';
-line.set('icons', icons);
-
-if (line.get('icons')[0].offset == "99.5%") {
-icons[0].offset = '100%';
-line.set('icons', icons);
-window.clearInterval(id);
-}
-
-}, 50);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
-</head>
-
-<body>
-<div id='map'></div>
-</body>
+            var icons = line.get('icons');
+            icons[0].offset = (count / 2) + '%';
+            line.set('icons', icons);
+        }, 60);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&callback=initMap">
+    </script>
+  </body>
 </html>

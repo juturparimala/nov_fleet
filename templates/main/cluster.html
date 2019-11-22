@@ -11,8 +11,8 @@
 
 <style>
 hr{
-        margin-top: 10px;
-    margin-bottom: 2px;
+        margin-top: 0px;
+    margin-bottom: 0px;
     border: 0;
     border-top: 1px solid #eee;
 }
@@ -663,7 +663,8 @@ $('#map').show();
     <span style="font-size: 20px">0</span><b style="font-size: 18px"><br>No Data</b></div>
     <div class="col-lg-1 col-sm-1 col-md-1"><img class="card-img-left" src="{% static 'images/ico.png'%}" width="40px" height="41px" style="padding-bottom:10px;"></a>
     &nbsp;&nbsp;<span style="font-size: 20px">11 </span><b><br>Alerts</b></div>
-</div></div><hr>
+</div></div>
+<!-- Files-->
  <div  class="container-fluid" style="font-size:28px; margin-top: 0px;">
 <div class="row"><div class="col-md-9 col-lg-9 col-sm-9"></div>
     <div class="col-md-3 col-lg-3 col-sm-3">
@@ -745,7 +746,7 @@ function myFunction() {
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 
-    <div class="container-fluid cont " ><div class="row"><div class="col-lg-6  col-md-6 col-sm-6">
+    <div class="container-fluid  " ><div class="row"><div class="col-lg-6  col-md-6 col-sm-6">
     <div  class="sample" id="sample">
 <table class="table table-bordered " id="tab">
 <thead class="color" id="text">
@@ -803,7 +804,7 @@ function myFunction() {
 </table>
     </div>
     </div>
-        <div id="map" class=" col-lg-6 col-md-6 col-sm-6 map" ></div> </div></div>
+        <div id="map" class=" col-lg-6 col-md-6 col-sm-6 map "  ></div> </div></div>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&callback=initMap"></script>
 {% endblock %}
